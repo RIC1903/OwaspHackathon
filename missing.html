@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<!--
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+-->
+<title>Report Missing Person</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<style>
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px 15%;
+}
+form header {
+  margin: 0 0 20px 0; 
+}
+form header div {
+  font-size: 90%;
+  color: #999;
+}
+form header h2 {
+  margin: 0 0 5px 0;
+}
+form > div {
+  clear: both;
+  overflow: hidden;
+  padding: 1px;
+  margin: 0 0 10px 0;
+}
+form > div > fieldset > div > div {
+  margin: 0 0 5px 0;
+}
+form > div > label,
+legend {
+	width: 25%;
+  float: left;
+  padding-right: 10px;
+}
+form > div > div,
+form > div > fieldset > div {
+  width: 75%;
+  float: right;
+}
+form > div > fieldset label {
+	font-size: 90%;
+}
+fieldset {
+	border: 0;
+  padding: 0;
+}
+
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password],
+textarea {
+	width: 100%;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+input[type=text],
+input[type=email],
+input[type=url],
+input[type=password] {
+  width: 50%;
+}
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=url]:focus,
+input[type=password]:focus,
+textarea:focus {
+  outline: 0;
+  border-color: #4697e4;
+}
+
+@media (max-width: 600px) {
+  form > div {
+    margin: 0 0 15px 0; 
+  }
+  form > div > label,
+  legend {
+	  width: 100%;
+    float: none;
+    margin: 0 0 5px 0;
+  }
+  form > div > div,
+  form > div > fieldset > div {
+    width: 100%;
+    float: none;
+  }
+  input[type=text],
+  input[type=email],
+  input[type=url],
+  input[type=password],
+  textarea,
+  select {
+    width: 100%; 
+  }
+}
+@media (min-width: 1200px) {
+  form > div > label,
+	legend {
+  	text-align: right;
+  }
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+<script src="https://cdn.firebase.com/js/client/2.2.0/firebase.js"></script>
+</head>
+<body translate="no">
+<form action="#" method="post">
+<header>
+<h2>Report Missing Person</h2>
+<!--<div>This form breaks at 600px and goes from a left-label form to a top-label form. At above 1200px, the labels align right.</div>-->
+</header>
+<div>
+<label class="desc" id="title1" for="Field1">Full Name of Missing person</label>
+<div>
+<input id="FullNameMiss" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1">
+</div>
+</div>
+<div>
+<label class="desc" id="dateTitle" for="FieldDate">Date Reported Missing</label>
+<div>
+<input id="FieldDate" name="FieldDate" type="text" class="field text fn" value="" size="8" tabindex="1">
+</div>
+</div>
+
+<div>
+<label class="desc" id="titlec" for="Field1">Full Name of complainant</label>
+<div>
+<input id="FullNameComp" name="Fieldc" type="text" class="field text fn" value="" size="8" tabindex="1">
+</div>
+</div>
+<div>
+<label class="desc" id="title3" for="Field3">
+Email (for further communication)
+</label>
+<div>
+<input id="email" name="Field3" type="email" spellcheck="false" value="" maxlength="255" tabindex="3">
+</div>
+</div>
+<div>
+<label class="desc" id="loc" for="Fieldl">Location</label>
+<div>
+<input id="location" name="Fieldl" type="text" class="field text fn" value="" size="8" tabindex="1">
+</div>
+</div>
+<div>
+<label>Gender</label>
+<input type="radio" name = "gender" id="gender">Male
+<input type="radio" name = "gender" id = "gender">Female<br>
+    </div>
+    <div>
+<label>Description of Missing person</label>
+<div><textarea id="Desc" name="Desc" spellcheck="true" rows="3" cols="40" tabindex="4"></textarea></div>
+    </div>
+
+
+<div>
+<label>Last seen</label>
+<div>
+<textarea id="LastSeen" name="LastSeen" spellcheck="true" rows="3" cols="40" tabindex="4"></textarea>
+    </div>
+    
+</div>
+    
+<div>
+<label>Address of complainant</label>
+<div>
+<textarea id="Addr" name="Addr" spellcheck="true" rows="3" cols="40" tabindex="4"></textarea>
+    </div>
+    
+</div>
+<div>
+<label class="desc" id="title106" for="Field106">
+Select a Choice
+</label>
+</div>
+<div>
+<div>
+<input id="saveForm" name="saveForm" type="submit" value="Submit">
+</div>
+</div>
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+//firebase
+<script type="text/javascript">
+$(document).ready(function() {
+    if ($('#newContact').length > 0 ) {
+        contactScript('forcontact');
+    }
+});
+//js and event listener
+document.getElementById("Missingform").addEventListener(submit,submitForm);
+function submitForm(e){
+    e.preventDefault();
+    var nameOfMiss = getInputVal("FullNameMiss");
+    var MissDate = getInputVal("FieldDate");
+    var NameComplaint = getInputVal("FullNameComp");
+    var email = getInputVal("email");
+    var location = getInputVal("location");
+    var gender = getInputVal("gender");
+    var lastSeen = getInputVal("LastSeen");
+    var addrComp = getInputVal("Addr");
+}
+function getInputVal(id){
+    return document.getElementById(id);
+}
+
+//firebase
+function contactScript(value) {
+    var a = { 
+      apiKey: "AIzaSyAdqNXW1saxRPpIxBdVArnEOQ1Ow3eLbx8",  // change this api key 
+	    authDomain: "discourse-skcript.firebaseapp.com",
+	    databaseURL: "https://discourse-skcript.firebaseio.com",
+	    projectId: "discourse-skcript",
+	    storageBucket: "discourse-skcript.appspot.com",
+	    messagingSenderId: "592087480717" };
+    firebase.initializeApp(a);
+    var b = firebase.database().ref("messages");
+        $("#newContact").submit(function(a) { $(this), console.log("Submit to Firebase");
+        var c = $("#name").val(),
+            d = $("#email").val(),
+            f = { name: c, email: d};
+        return b.push(f).then(function(a) { 
+            $(".sucess").css("display", "block"), 
+            $(".sucess-none").css("display", "none") }), !1 })   
+}
+</script>
+
+
+</body></html>
